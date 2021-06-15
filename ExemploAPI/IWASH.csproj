@@ -120,24 +120,36 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\EnderecosController.cs" />
+    <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="DataContext\BaseContext.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ParceirosController.cs" />
+    <Compile Include="Domain\Enderecos.cs" />
     <Compile Include="Domain\Parceiros.cs" />
     <Compile Include="Domain\Produtos.cs" />
     <Compile Include="Domain\Usuarios.cs" />
-    <Compile Include="Migrations\202104272100093_UsuarioseParceiros.cs" />
-    <Compile Include="Migrations\202104272100093_UsuarioseParceiros.designer.cs">
-      <DependentUpon>202104272100093_UsuarioseParceiros.cs</DependentUpon>
+    <Compile Include="Mapeamento\EnderecosMap.cs" />
+    <Compile Include="Migrations\202104281834402_UsuarioseParceiros.cs" />
+    <Compile Include="Migrations\202104281834402_UsuarioseParceiros.designer.cs">
+      <DependentUpon>202104281834402_UsuarioseParceiros.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104272107238_AlteracaoChaveEstrangeira.cs" />
-    <Compile Include="Migrations\202104272107238_AlteracaoChaveEstrangeira.designer.cs">
-      <DependentUpon>202104272107238_AlteracaoChaveEstrangeira.cs</DependentUpon>
+    <Compile Include="Migrations\202104282030106_AdicionadoDataTime.cs" />
+    <Compile Include="Migrations\202104282030106_AdicionadoDataTime.designer.cs">
+      <DependentUpon>202104282030106_AdicionadoDataTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104272123019_AdicioneiEmailEmUsuarios.cs" />
-    <Compile Include="Migrations\202104272123019_AdicioneiEmailEmUsuarios.designer.cs">
-      <DependentUpon>202104272123019_AdicioneiEmailEmUsuarios.cs</DependentUpon>
+    <Compile Include="Migrations\202105241820167_Atualizacao.cs" />
+    <Compile Include="Migrations\202105241820167_Atualizacao.designer.cs">
+      <DependentUpon>202105241820167_Atualizacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105301616498_TblEndereco.cs" />
+    <Compile Include="Migrations\202105301616498_TblEndereco.designer.cs">
+      <DependentUpon>202105301616498_TblEndereco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105310005404_AlteracaoEndereco.cs" />
+    <Compile Include="Migrations\202105310005404_AlteracaoEndereco.designer.cs">
+      <DependentUpon>202105310005404_AlteracaoEndereco.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ZZEntity\ParceiroEntity.cs" />
@@ -167,14 +179,20 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202104272100093_UsuarioseParceiros.resx">
-      <DependentUpon>202104272100093_UsuarioseParceiros.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104281834402_UsuarioseParceiros.resx">
+      <DependentUpon>202104281834402_UsuarioseParceiros.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104272107238_AlteracaoChaveEstrangeira.resx">
-      <DependentUpon>202104272107238_AlteracaoChaveEstrangeira.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104282030106_AdicionadoDataTime.resx">
+      <DependentUpon>202104282030106_AdicionadoDataTime.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104272123019_AdicioneiEmailEmUsuarios.resx">
-      <DependentUpon>202104272123019_AdicioneiEmailEmUsuarios.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105241820167_Atualizacao.resx">
+      <DependentUpon>202105241820167_Atualizacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105301616498_TblEndereco.resx">
+      <DependentUpon>202105301616498_TblEndereco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105310005404_AlteracaoEndereco.resx">
+      <DependentUpon>202105310005404_AlteracaoEndereco.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -7,13 +7,13 @@ namespace ExemploAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AdicioneiEmailEmUsuarios : IMigrationMetadata
+    public sealed partial class TblEndereco : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AdicioneiEmailEmUsuarios));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TblEndereco));
         
         string IMigrationMetadata.Id
         {
-            get { return "202104272123019_AdicioneiEmailEmUsuarios"; }
+            get { return "202105301616498_TblEndereco"; }
         }
         
         string IMigrationMetadata.Source

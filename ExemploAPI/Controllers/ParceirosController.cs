@@ -27,31 +27,37 @@ namespace ExemploAPI.Controllers
             return _context.Parceiro.ToList();
         }
 
-        [Route("getParceirosComProdutos")]
+
+        [Route("obterParceirosId/{id}")]
         [HttpGet]
-        public Parceiros getParceirosComProdutos(int id)
+        public Parceiros obterParceirosId(int id)
         {
             Parceiros Parceiro = _context.Parceiro.Where(x => x.Id == id).FirstOrDefault();
 
             return Parceiro;
         }
 
-        [Route("getParceirosbyID")]
-        [HttpGet]
-        public Parceiros getParceirosbyID(int id)
-        {
-            Parceiros Parceiro = _context.Parceiro.Where(x => x.Id == id).FirstOrDefault();
 
-            return Parceiro;
-        }
-
-        [Route("aluno")]
-        [Authorize]
+        [Route("alteraParceiro")]
         [HttpPost]
-        public String AlterarParceiro(Parceiros parceiro)
+        public String alterarParceiro( Parceiros parceiro)
         {
 
-            _context.Parceiro.Add(parceiro);
+            var original = _context.Parceiro.Where(x => x.Id == parceiro.Id).FirstOrDefault();
+
+            if(original != null)
+            {
+                parceiro.DataCriacao = original.DataCriacao;
+                parceiro.DataAlteracao = DateTime.Now;
+                _context.Entry(original).CurrentValues.SetValues(parceiro);
+            }
+            else
+            {
+                parceiro.DataAlteracao = DateTime.Now;
+                parceiro.DataCriacao = DateTime.Now;
+                _context.Parceiro.Add(parceiro);
+            }
+
 
             try
             {
@@ -60,13 +66,13 @@ namespace ExemploAPI.Controllers
             }
             catch
             {
-                return "Erro ao salvar o usuário";
+                return "Erro ao salvar o parceiro";
             }
 
         }
 
-        [Route("login")]
-        public Parceiros Login(ParceirosLogin login)
+        [Route("loginParceiro")]
+        public Parceiros logarParceiro(ParceirosLogin login)
         {
 
             Parceiros parceiro = _context.Parceiro.Where(x => x.CNPJ == login.CNPJ && x.Senha == login.senha).FirstOrDefault();
@@ -75,10 +81,18 @@ namespace ExemploAPI.Controllers
 
         }
 
-        [Authorize]
-        public void Delete(int id)
+        [Route("deletarParceiro/{id}")]
+        [HttpDelete]
+        public void deletarParceiro(int id)
         {
-            parceiros.RemoveAt(parceiros.IndexOf(parceiros.First(x => x.Id.Equals(id))));
+            var itemToRemove = _context.Parceiro.SingleOrDefault(x => x.Id == id);
+
+            if (itemToRemove != null)
+            {
+                _context.Parceiro.Remove(itemToRemove);
+                _context.SaveChanges();
+            }
+            
         }
 
 

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http.Cors;
 using ExemploAPI.Domain;
+using System.Data.Entity;
 
 namespace ExemploAPI.Controllers
 {
@@ -17,57 +18,84 @@ namespace ExemploAPI.Controllers
 
         private BaseContext _context = new BaseContext();
 
-
-        
         public List<Usuarios> Get()
         {
             return _context.Usuario.ToList();
         }
 
 
-        [Route("getUsuariosbyID")]
+        [Route("obterUsuariosId/{id}")]
         [HttpGet]
-        public Usuarios getUsuariosbyID(int id)
+        public Usuarios obterUsuariosID(int id)
         {
             Usuarios usuario = _context.Usuario.Where(x => x.Id == id).FirstOrDefault();
 
             return usuario;
         }
 
-        [Route("aluno")]
-        [Authorize]
+        [Route("alterarUsuario")]       
         [HttpPost]
-        public String AlterarUsuario(Usuarios usuario)
-        {          
-                      
-            _context.Usuario.Add(usuario);
+        public int alterarUsuario(Usuarios usuario)
+        {
+            var original = _context.Usuario.Where(x => x.Id == usuario.Id).FirstOrDefault();
+
+            var usuarioExistente = _context.Usuario.Where(x => x.Email == usuario.Email).Count();
+
+            if(usuarioExistente > 0)
+            {
+                return 2;
+            }
+
+            if (original != null)
+            {
+                usuario.DataCriacao = original.DataCriacao;
+                usuario.DataAlteracao = DateTime.Now;
+                _context.Entry(original).CurrentValues.SetValues(usuario);
+            }
+            else
+            {
+                
+                usuario.DataAlteracao = DateTime.Now;
+                usuario.DataCriacao = DateTime.Now;
+                _context.Usuario.Add(usuario);              
+            }
+   
 
             try
             {
                 _context.SaveChanges();
-                return "Salvo com sucesso";
+                return 0;
             }
             catch
             {
-                return "Erro ao salvar o usuário";
+                return 1;
             }       
 
         }
+  
 
-        [Route("login")]
-        public Usuarios Login(UsuariosLogin login)
+        [Route("loginUsuario")]
+       
+        public Usuarios logarUsuario(UsuariosLogin login)
         {
 
-            Usuarios usuario = _context.Usuario.Where(x => x.Login == login.login && x.Senha == login.senha).FirstOrDefault();
+            Usuarios usuario = _context.Usuario.Where(x => x.Email == login.email && x.Senha == login.senha).FirstOrDefault();
 
             return usuario;
 
         }
 
-        [Authorize]
-        public void Delete(int id)
+        [Route("deletarUsuario/{id}")]
+        [HttpDelete]
+        public void deletarUsuario(int id)
         {
-            Usuarios.RemoveAt(Usuarios.IndexOf(Usuarios.First(x => x.Id.Equals(id))));
+            var itemToRemove = _context.Usuario.SingleOrDefault(x => x.Id == id);
+
+            if (itemToRemove != null)
+            {
+                _context.Usuario.Remove(itemToRemove);
+                _context.SaveChanges();
+            }
         }
 
 

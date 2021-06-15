@@ -7,13 +7,13 @@ namespace ExemploAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AlteracaoChaveEstrangeira : IMigrationMetadata
+    public sealed partial class UsuarioseParceiros : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AlteracaoChaveEstrangeira));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UsuarioseParceiros));
         
         string IMigrationMetadata.Id
         {
-            get { return "202104272107238_AlteracaoChaveEstrangeira"; }
+            get { return "202104281834402_UsuarioseParceiros"; }
         }
         
         string IMigrationMetadata.Source

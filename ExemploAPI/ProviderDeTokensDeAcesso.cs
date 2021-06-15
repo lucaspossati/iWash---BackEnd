@@ -21,7 +21,7 @@ namespace ExemploAPI
 
         public bool logarUsuarios(string login, string password)
         {
-            return _context.Usuario.Where(x => x.Login == login && x.Senha == password).Count() > 0;
+            return _context.Usuario.Where(x => x.Email == login && x.Senha == password).Count() > 0;
         }
 
         public bool logarParceiros(string login, string password)

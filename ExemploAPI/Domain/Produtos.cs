@@ -12,8 +12,11 @@ namespace ExemploAPI.Domain
         public string Nome { get; set; }
         public decimal Preco { get; set; }
         public string Descricao { get; set; }
-        public virtual Parceiros ParceirosId { get; set; }
+        public DateTime DataCriacao { get; set; }
+        public DateTime DataAlteracao { get; set; }
+        public int ParceirosId { get; set; }
         public Parceiros Parceiros { get; set; }
+        
     }
 }
 
